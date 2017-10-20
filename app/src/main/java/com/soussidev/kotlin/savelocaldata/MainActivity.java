@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         fab_filtre.setOnClickListener(view -> {
 
             Log.d(TAG, "fab_filtre: ");
-
+            // init PopupvMenu
             PopupMenu menu = new PopupMenu(MainActivity.this, view);
 
             for(Marque marque : Marque.values())
@@ -99,23 +99,14 @@ public class MainActivity extends AppCompatActivity {
             return true;
             });
 
-           /* menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    filter_items(item);
-
-
-                    return true;
-                }
-            });*/
 
             menu.show();
 
 
         });
 
-     recyclerView=(RecyclerView)findViewById(R.id.recycler);
-     collapsingToolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar);
+        recyclerView=(RecyclerView)findViewById(R.id.recycler);
+        collapsingToolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle("List Of Products");
 
         collapsingToolbarLayout.setScrimsShown(true);
@@ -124,15 +115,15 @@ public class MainActivity extends AppCompatActivity {
         collapsingToolbarLayout.setSoundEffectsEnabled(true);
         collapsingToolbarLayout.setBackgroundResource(R.drawable.samsunggalaxy);
 
-     gridLayoutManager = new GridLayoutManager(MainActivity.this, SPAN_COUNT_ONE);
-     recyclerView.setLayoutManager(gridLayoutManager);
+        gridLayoutManager = new GridLayoutManager(MainActivity.this, SPAN_COUNT_ONE);
+        recyclerView.setLayoutManager(gridLayoutManager);
 
         itemAdapter = new ProductAdaptor(itemProduct, gridLayoutManager,this);
         recyclerView.setAdapter(itemAdapter);
     }
 
 
-
+    //Test observe
     private void InitObserve()
     {
         //Observe by Marque
@@ -165,6 +156,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * @author soussi
+    * @param item
+     *
+    *
+    * */
+
     private void filter_items(MenuItem item)
     {
         //Observe by Marque
@@ -175,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
 
                 .subscribe(ProductGroupedObservable -> {
                     switch (ProductGroupedObservable.getKey()) {
-                        //  ProductGroupedObservable.getKey()
+
 
                         case "Samsung": {
                             ProductGroupedObservable.asObservable()
@@ -307,11 +305,11 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Product> getLg() {
         ArrayList<Product> Lg = new ArrayList<>();
-        Lg.add(new Product(0,"Lg G1",Marque.Lg,"G1",210.000,"2014",R.drawable.pixel_2));
-        Lg.add(new Product(1,"Lg G2",Marque.Lg,"G2",320.000,"2015",R.drawable.pixel_2));
-        Lg.add(new Product(2,"Lg G3",Marque.Lg,"G3",550.000,"2016",R.drawable.pixel_2));
-        Lg.add(new Product(3,"Lg G4",Marque.Lg,"G4",750.000,"2017",R.drawable.pixel_2));
-        Lg.add(new Product(4,"Lg G4",Marque.Lg,"G5",1550.000,"2017",R.drawable.pixel_2));
+        Lg.add(new Product(0,"Lg G1",Marque.Lg,"G1",210.000,"2014",R.drawable.lg));
+        Lg.add(new Product(1,"Lg G2",Marque.Lg,"G2",320.000,"2015",R.drawable.lg));
+        Lg.add(new Product(2,"Lg G3",Marque.Lg,"G3",550.000,"2016",R.drawable.lg));
+        Lg.add(new Product(3,"Lg G4",Marque.Lg,"G4",750.000,"2017",R.drawable.lg));
+        Lg.add(new Product(4,"Lg G5",Marque.Lg,"G5",1550.000,"2017",R.drawable.lg));
         return Lg;
     }
     @Override
