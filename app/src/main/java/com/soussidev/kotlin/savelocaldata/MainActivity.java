@@ -1,4 +1,5 @@
 package com.soussidev.kotlin.savelocaldata;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -13,11 +14,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
 import com.soussidev.kotlin.savelocaldata.adaptor.ProductAdaptor;
 import com.soussidev.kotlin.savelocaldata.model.Marque;
 import com.soussidev.kotlin.savelocaldata.model.PriceUnit;
 import com.soussidev.kotlin.savelocaldata.model.Product;
+
 import java.util.ArrayList;
+
 import rx.Observable;
 
 
@@ -40,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: ");
+        //Init Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -53,24 +58,25 @@ public class MainActivity extends AppCompatActivity {
         });
         InitView();
 
-        InitObserve();
-
+        InitObserve();//Test observe
+        //Get Orientation of screen
         getorientation=getResources().getConfiguration().orientation;
         Log.d(TAG, "onOrientation: "+getorientation);
-
+        //add data to array list
         itemProduct.addAll(getGoogle());
         itemProduct.addAll(getSamsung());
+        itemProduct.addAll(getLg());
 
         itemAdapter.notifyItemRangeChanged(0, itemAdapter.getItemCount());
     }
-
+    //init view
     private void InitView()
     {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Log.d(TAG, "InitView /SDK VERSION: "+android.os.Build.VERSION.SDK_INT);
         }
 
-
+        //Btn Filtre Items by Marque
         fab_filtre=(FloatingActionButton)findViewById(R.id.fab_filtre);
 
         fab_filtre.setOnClickListener(view -> {
@@ -87,7 +93,13 @@ public class MainActivity extends AppCompatActivity {
             menu.getMenu().add("Show All");
             menu.show();
 
-            menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            menu.setOnMenuItemClickListener(item -> {
+
+                filter_items(item);
+            return true;
+            });
+
+           /* menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
                     filter_items(item);
@@ -95,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
                     return true;
                 }
-            });
+            });*/
 
             menu.show();
 
@@ -167,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
 
                         case "Samsung": {
                             ProductGroupedObservable.asObservable()
-                                    .subscribe(product -> System.out.println("title:" + product.getTitle()));
+                                    .subscribe(product -> collapsingToolbarLayout.setTitle(product.getTitle().toString()));
                             itemProduct.clear();
                             itemProduct.addAll(getSamsung());
                             itemAdapter.notifyItemRangeChanged(0, itemAdapter.getItemCount());
@@ -177,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         case "Google": {
                             ProductGroupedObservable.asObservable()
-                                    .subscribe(product -> System.out.println("title:" + product.getTitle()));
+                                    .subscribe(product -> collapsingToolbarLayout.setTitle(product.getTitle().toString()));
                             itemProduct.clear();
                             itemProduct.addAll(getGoogle());
                             itemAdapter.notifyItemRangeChanged(0, itemAdapter.getItemCount());
@@ -188,58 +200,69 @@ public class MainActivity extends AppCompatActivity {
                         }
                         case "Nokia": {
                             ProductGroupedObservable.asObservable()
-                                    .subscribe(product -> System.out.println("title:" + product.getTitle()));
-
+                                    .subscribe(product -> collapsingToolbarLayout.setTitle(product.getTitle().toString()));
+                            itemProduct.clear();
+                            itemAdapter.notifyItemRangeChanged(0, itemAdapter.getItemCount());
+                            itemAdapter = new ProductAdaptor(itemProduct, gridLayoutManager,getApplicationContext());
+                            recyclerView.setAdapter(itemAdapter);
 
                             break;
                         }
                         case "Sony": {
                             ProductGroupedObservable.asObservable()
-                                    .subscribe(product -> System.out.println("title:" + product.getTitle()));
-
+                                    .subscribe(product -> collapsingToolbarLayout.setTitle(product.getTitle().toString()));
+                            itemProduct.clear();
+                            itemAdapter.notifyItemRangeChanged(0, itemAdapter.getItemCount());
+                            itemAdapter = new ProductAdaptor(itemProduct, gridLayoutManager,getApplicationContext());
+                            recyclerView.setAdapter(itemAdapter);
 
                             break;
                         }
                         case "Motorola": {
                             ProductGroupedObservable.asObservable()
-                                    .subscribe(product -> System.out.println("title:" + product.getTitle()));
-
+                                    .subscribe(product -> collapsingToolbarLayout.setTitle(product.getTitle().toString()));
+                            itemProduct.clear();
+                            itemAdapter.notifyItemRangeChanged(0, itemAdapter.getItemCount());
+                            itemAdapter = new ProductAdaptor(itemProduct, gridLayoutManager,getApplicationContext());
+                            recyclerView.setAdapter(itemAdapter);
                             break;
                         }
                         case "Lg": {
                             ProductGroupedObservable.asObservable()
-                                    .subscribe(product -> System.out.println("title:" + product.getTitle()));
+                                    .subscribe(product -> collapsingToolbarLayout.setTitle(product.getTitle().toString()));
 
-
+                            itemProduct.clear();
+                            itemProduct.addAll(getLg());
+                            itemAdapter.notifyItemRangeChanged(0, itemAdapter.getItemCount());
+                            itemAdapter = new ProductAdaptor(itemProduct, gridLayoutManager,getApplicationContext());
+                            recyclerView.setAdapter(itemAdapter);
                             break;
                         }
                         case "Htc": {
                             ProductGroupedObservable.asObservable()
-                                    .subscribe(product -> System.out.println("title:" + product.getTitle()));
-
+                                    .subscribe(product -> collapsingToolbarLayout.setTitle(product.getTitle().toString()));
+                            itemProduct.clear();
+                            itemAdapter.notifyItemRangeChanged(0, itemAdapter.getItemCount());
+                            itemAdapter = new ProductAdaptor(itemProduct, gridLayoutManager,getApplicationContext());
+                            recyclerView.setAdapter(itemAdapter);
 
                             break;
                         }
                         case "Huawei": {
                             ProductGroupedObservable.asObservable()
-                                    .subscribe(product -> System.out.println("title:" + product.getTitle()));
+                                    .subscribe(product -> collapsingToolbarLayout.setTitle(product.getTitle().toString()));
                             itemProduct.clear();
-                            itemAdapter.notifyItemRangeChanged(0, itemAdapter.getItemCount());
-                            itemProduct.addAll(getGoogle());
-                            itemProduct.addAll(getSamsung());
                             itemAdapter.notifyItemRangeChanged(0, itemAdapter.getItemCount());
                             itemAdapter = new ProductAdaptor(itemProduct, gridLayoutManager,getApplicationContext());
                             recyclerView.setAdapter(itemAdapter);
-                            recyclerView.getAdapter().notifyDataSetChanged();
 
                             break;
                         }
 
                         case "Show All": {
                             ProductGroupedObservable.asObservable()
-                                    .subscribe(product -> System.out.println("title:" + product.getTitle()));
+                                    .subscribe(product -> collapsingToolbarLayout.setTitle(product.getTitle().toString()));
                             itemProduct.clear();
-                            itemAdapter.notifyItemRangeChanged(0, itemAdapter.getItemCount());
                             itemProduct.addAll(getGoogle());
                             itemProduct.addAll(getSamsung());
                             itemAdapter.notifyItemRangeChanged(0, itemAdapter.getItemCount());
@@ -263,12 +286,12 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Product> Samsung = new ArrayList<>();
         Samsung.add(new Product(0,"samsung Galaxy 1", Marque.Samsung,"S1",250.000,"2011",R.drawable.samsung));
         Samsung.add(new Product(1,"samsung Galaxy 2", Marque.Samsung,"S2",300.000,"2012",R.drawable.samsung));
-        Samsung.add(new Product(1,"samsung Galaxy 3", Marque.Samsung,"S3",350.000,"2013",R.drawable.samsung));
-        Samsung.add(new Product(1,"samsung Galaxy 4", Marque.Samsung,"S4",1150.000,"2014",R.drawable.samsung));
-        Samsung.add(new Product(1,"samsung Galaxy 5", Marque.Samsung,"S5",1450.000,"2015",R.drawable.samsung));
-        Samsung.add(new Product(1,"samsung Galaxy 6", Marque.Samsung,"S6",1850.000,"2015",R.drawable.samsung));
-        Samsung.add(new Product(1,"samsung Galaxy 7", Marque.Samsung,"S7",2150.000,"2016",R.drawable.samsung));
-        Samsung.add(new Product(1,"samsung Galaxy 8", Marque.Samsung,"S8",2450.000,"2017",R.drawable.samsung));
+        Samsung.add(new Product(2,"samsung Galaxy 3", Marque.Samsung,"S3",350.000,"2013",R.drawable.samsung));
+        Samsung.add(new Product(3,"samsung Galaxy 4", Marque.Samsung,"S4",1150.000,"2014",R.drawable.samsung));
+        Samsung.add(new Product(4,"samsung Galaxy 5", Marque.Samsung,"S5",1450.000,"2015",R.drawable.samsung));
+        Samsung.add(new Product(5,"samsung Galaxy 6", Marque.Samsung,"S6",1850.000,"2015",R.drawable.samsung));
+        Samsung.add(new Product(6,"samsung Galaxy 7", Marque.Samsung,"S7",2150.000,"2016",R.drawable.samsung));
+        Samsung.add(new Product(7,"samsung Galaxy 8", Marque.Samsung,"S8",2450.000,"2017",R.drawable.samsung));
 
         return Samsung;
     }
@@ -277,9 +300,19 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Product> google = new ArrayList<>();
         google.add(new Product(0,"Google Pixel",Marque.Google,"Pixel",950.000,"2016",R.drawable.pixel_2));
         google.add(new Product(1,"Google Pixel 2",Marque.Google,"Pixel 2",1300.000,"2017",R.drawable.pixel_2));
-        google.add(new Product(1,"Google Pixel 3",Marque.Google,"Pixel 3",2350.000,"2017",R.drawable.pixel_2));
+        google.add(new Product(2,"Google Pixel 3",Marque.Google,"Pixel 3",2350.000,"2017",R.drawable.pixel_2));
 
         return google;
+    }
+
+    private ArrayList<Product> getLg() {
+        ArrayList<Product> Lg = new ArrayList<>();
+        Lg.add(new Product(0,"Lg G1",Marque.Lg,"G1",210.000,"2014",R.drawable.pixel_2));
+        Lg.add(new Product(1,"Lg G2",Marque.Lg,"G2",320.000,"2015",R.drawable.pixel_2));
+        Lg.add(new Product(2,"Lg G3",Marque.Lg,"G3",550.000,"2016",R.drawable.pixel_2));
+        Lg.add(new Product(3,"Lg G4",Marque.Lg,"G4",750.000,"2017",R.drawable.pixel_2));
+        Lg.add(new Product(4,"Lg G4",Marque.Lg,"G5",1550.000,"2017",R.drawable.pixel_2));
+        return Lg;
     }
     @Override
     protected void onStart() {
