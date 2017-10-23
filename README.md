@@ -14,8 +14,8 @@ Recyclerview filtre items using observable
 <img src="picture/Screenshot_1508540215.png" height="450" width="280">
 </td>
 <td>
-<p>Fragment Upload </p>
-<img src="picture/img_upload.png" height="450" width="280">
+<p>Picture 2 </p>
+<img src="picture/Screenshot_1508540226.png" height="450" width="280">
 </td>
 </tr>
 </table>   
