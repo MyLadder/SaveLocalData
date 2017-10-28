@@ -1,6 +1,8 @@
 package com.soussidev.kotlin.savelocaldata.adaptor;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,7 +18,6 @@ import com.soussidev.kotlin.savelocaldata.model.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.soussidev.kotlin.savelocaldata.MainActivity.SPAN_COUNT_ONE;
 
@@ -61,6 +62,7 @@ public class ProductAdaptor extends RecyclerView.Adapter<ProductAdaptor.ItemView
         return new ItemViewHolder(view, viewType);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
 
@@ -81,6 +83,7 @@ public class ProductAdaptor extends RecyclerView.Adapter<ProductAdaptor.ItemView
         //  holder.iv.setImageResource(R.mipmap.ic_launcher);
         if (getItemViewType(position) == VIEW_TYPE_BIG) {
             holder.info.setText(" Marque  ·  "+product.getMarque_prod() +"- Model "  + product.getModel_product());
+            holder.info.setTooltipText(" Marque  ·  "+product.getMarque_prod() +"- Model "  + product.getModel_product());
             holder.price.setText(String.valueOf(product.getPrice_prod()+" "+ PriceUnit.DT));
         }
 

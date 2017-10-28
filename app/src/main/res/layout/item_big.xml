@@ -54,13 +54,17 @@
             android:id="@+id/tv_info"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:layout_width="match_parent"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:tooltipText="Marque"
             android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
             android:text="20 likes · 33 comments"/>
 
 
         <LinearLayout
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal">
@@ -68,7 +72,9 @@
             <TextView
                 android:id="@+id/tv_price"
                 android:gravity="right"
-                android:layout_marginBottom="5dp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:layout_marginBottom="10dp"
                 android:textStyle="bold"
                 android:textColor="@android:color/holo_green_light"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
